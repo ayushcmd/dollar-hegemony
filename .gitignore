@@ -1,0 +1,7 @@
+data/raw/
+models/
+__pycache__/
+*.pkl
+*.keras
+*.pt
+.env
