@@ -1,3 +1,11 @@
+---
+title: Dollar Hegemony
+emoji: 💵
+colorFrom: blue
+colorTo: green
+sdk: docker
+pinned: false
+---
 # Dollar Hegemony — AI/ML Research System
 ## 🔴 [Live Demo ](https://huggingface.co/spaces/Ayush0826/dollar-hegemony)
 
