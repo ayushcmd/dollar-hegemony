@@ -1,0 +1,6 @@
+Model,Country,MAE (%),RMSE (%),Dir_Acc (%)
+XGBoost,Brazil,12.431,15.664,57.5
+XGBoost,Russia,18.714,22.843,58.3
+XGBoost,India,4.768,5.939,81.7
+XGBoost,China,4.195,5.01,50.8
+XGBoost,South_Africa,9.549,12.03,50.0

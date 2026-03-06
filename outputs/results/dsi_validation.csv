@@ -1,0 +1,6 @@
+Country,Corr_with_DSI,Corr_with_DXY,DSI_vs_DXY_gain,DSI_wins
+Brazil,0.76,0.551,0.209,YES
+Russia,0.609,0.375,0.234,YES
+India,0.485,0.503,-0.018,no
+China,0.45,0.375,0.075,YES
+South_Africa,0.57,0.487,0.083,YES

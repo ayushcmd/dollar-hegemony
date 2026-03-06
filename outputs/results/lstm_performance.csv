@@ -1,0 +1,6 @@
+Model,Country,MAE (%),RMSE (%),Dir_Acc (%)
+LSTM,Brazil,11.154,13.455,50.0
+LSTM,Russia,21.62,27.773,56.5
+LSTM,India,2.147,2.475,88.9
+LSTM,China,3.357,4.18,45.4
+LSTM,South_Africa,7.294,8.786,67.6
