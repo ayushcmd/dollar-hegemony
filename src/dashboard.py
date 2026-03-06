@@ -1580,4 +1580,4 @@ if __name__ == "__main__":
     print("Dollar Hegemony Dashboard v4  Full Feature Set")
     print("Tabs: Macro  Models  Scenario Sim  World Map  Crisis Alerts  Fundamentals  News Feed")
     print("Open: http://localhost:8050")
-    app.run(debug=True, port=8050)
+    app.run(host="0.0.0.0", port=8050, debug=False)
