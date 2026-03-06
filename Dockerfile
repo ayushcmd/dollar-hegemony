@@ -7,7 +7,6 @@ RUN pip install --no-cache-dir -r requirements-dashboard.txt
 
 COPY src/ ./src/
 COPY data/ ./data/
-COPY outputs/ ./outputs/
 
 EXPOSE 7860
 
