@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+
+  # ── FastAPI ML Backend ──────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: dollar_hegemony_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data/processed:/app/data/processed:ro
+      - ./models:/app/models:ro
+      - ./outputs/results:/app/outputs/results:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ── Dash Dashboard ──────────────────────────────────────────────
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    container_name: dollar_hegemony_dashboard
+    ports:
+      - "8050:8050"
+    volumes:
+      - ./data:/app/data:ro
+      - ./outputs:/app/outputs:ro
+      - ./models:/app/models:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - api
+    restart: unless-stopped
