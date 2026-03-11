@@ -1,4 +1,5 @@
 # Dollar Hegemony — AI/ML Research System
+## 🔴 [Live Demo ](https://huggingface.co/spaces/Ayush0826/dollar-hegemony)
 
 > **Quantifying the cascading impact of US Dollar dominance on BRICS vs G7 economies using Deep Learning, Time-Series Forecasting, and a novel Dollar Stress Index (DSI).**
 
