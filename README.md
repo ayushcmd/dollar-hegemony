@@ -1,231 +1,245 @@
+# Dollar Hegemony  
+## Quantifying USD Dominance Across BRICS vs G7 with DSI, XGBoost, and LSTM
 
-# Dollar Hegemony — AI/ML Research System
-## 🔴 [Live Demo ](https://huggingface.co/spaces/Ayush0826/dollar-hegemony)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Plotly Dash](https://img.shields.io/badge/Frontend-Plotly%20Dash-3F4F75)](https://plotly.com/dash/)
+[![FastAPI](https://img.shields.io/badge/API-FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Models](https://img.shields.io/badge/Models-XGBoost%20%7C%20LSTM-orange)](#modeling-framework)
+[![Hugging Face Space](https://img.shields.io/badge/Live%20Demo-HuggingFace-FFD21E?logo=huggingface&logoColor=black)](https://huggingface.co/spaces/Ayush0826/dollar-hegemony)
 
-> **Quantifying the cascading impact of US Dollar dominance on BRICS vs G7 economies using Deep Learning, Time-Series Forecasting, and a novel Dollar Stress Index (DSI).**
-
-![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.2-red?logo=pytorch)
-![XGBoost](https://img.shields.io/badge/XGBoost-2.0-orange)
-![Dash](https://img.shields.io/badge/Dash-2.0-blue?logo=plotly)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.110-green?logo=fastapi)
-![Docker](https://img.shields.io/badge/Docker-ready-blue?logo=docker)
+An interactive macro-financial ML research system that tracks USD strength, estimates stress transmission across BRICS/G7 economies, and supports scenario-based currency depreciation analysis.
 
 ---
 
-## What This Project Does
+## Live Demo
 
-The USD drives global inflation, currency depreciation, and capital flows — but its impact on BRICS nations is dramatically different from G7 economies. This project builds a full ML research pipeline to quantify, model, and forecast those differences.
-
-**Core research questions answered:**
-- How does a 10-point DXY rise transmit into BRICS currency depreciation vs G7?
-- Can deep learning predict emerging market currency stress 3 months ahead?
-- What is the Dollar Stress Index (DSI) — and does it predict financial crises?
-- How do oil shocks, Fed rate hikes, and capital flows interact across countries?
+- **Hugging Face Space:** https://huggingface.co/spaces/Ayush0826/dollar-hegemony
 
 ---
 
-## Architecture
+## Research Objective
 
-```
-Raw Data (FRED + World Bank + Yahoo Finance)
-        ↓
-   Data Pipeline  →  master_monthly_v2.csv
-        ↓
- Feature Engineer  →  DSI + 60+ macro signals
-        ↓
-  ┌─────────────────────────────────┐
-  │  XGBoost   LSTM   Transformer   │  ← 3 independent models
-  └──────────────┬──────────────────┘
-                 ↓
-          Meta Ensemble  (Ridge blending)
-                 ↓
-     FastAPI  ←→  Dash Dashboard
-```
+This project quantifies how USD regime shifts (strength, momentum, liquidity pressure) propagate into country-level currency stress, especially for BRICS economies relative to G7 context.
 
 ---
 
-## Models
+## Key Contributions
 
-| Model | Architecture | Novel Feature |
-|-------|-------------|---------------|
-| **XGBoost** | Gradient boosting, walk-forward validation | SHAP analysis per BRICS country |
-| **LSTM** | 2-layer, 64 hidden units, dropout 0.2 | Sequential currency momentum capture |
-| **Transformer** | 4-head attention, 2 encoder layers | Cross-country contagion attention weights |
-| **Meta Ensemble** | Ridge blending + Monte Carlo dropout | Confidence intervals via MC sampling |
+- **Dollar Stress Index (DSI):** composite USD pressure signal
+- **Country-level depreciation analytics:** 12-month impact vs USD
+- **Hybrid model layer:** XGBoost + LSTM
+- **Scenario simulator:** user-controlled DXY level + momentum
+- **Crisis diagnostics:** country alert states and stress timelines
+- **Macro context integration:** fundamentals + live BRICS-focused news
+
+---
+
+## Dashboard Modules
+
+### 1) Macro
+- Timeline coverage: **2000–2024**
+- DXY historical chart with crisis markers (e.g., GFC, COVID)
+- DSI gauge and stress-zone view
+- BRICS vs G7 depreciation comparison
+- Correlation/stress exploration panels
+
+### 2) Models
+- Country selector: Brazil, Russia, India, China, South Africa
+- LSTM actual vs predicted panel (3-month ahead)
+- Metrics table: MAE, RMSE, Directional Accuracy
+- Directional accuracy comparison chart by country
+
+### 3) Scenario Sim
+- DXY level slider
+- DXY 12-month momentum slider
+- Quick presets: Strong Dollar / Current / Weak Dollar
+- Projected 12M depreciation cards (country-wise)
+- Sensitivity analysis and scenario bar chart
+
+### 4) World Map
+- Global choropleth of currency stress/depreciation
+- Color mode toggle (Latest Depreciation / Alert Level)
+- Period selector + country click interaction
+
+### 5) Crisis Alerts
+- Regime counters: Critical / Warning / Watch / Stable
+- Country status board with depreciation + crisis-period behavior
+- DSI timeline for crisis windows
+- Worst depreciation events ranking
+- Country crisis-history selector
+
+### 6) Fundamentals
+- Indicator selector (example: GDP Growth)
+- Multi-country BRICS trend view
+- Country summary cards
+- BRICS stock index panel
+- Cross-indicator correlation scatter analysis
+
+### 7) News Feed
+- Live BRICS/emerging-market/USD-relevant headlines
+- Refresh workflow for updates
+- Macro snapshot: DXY, DSI, WTI, Fed Rate, US CPI YoY
+
+---
+
+## Header KPIs
+
+The app top bar displays:
+- **DXY Index**
+- **DSI Score**
+- **Coverage (2000–2024)**
+- **Alerts count**
 
 ---
 
 ## Dollar Stress Index (DSI)
 
-The DSI is the **academic novelty** of this project — a composite index that combines:
+### Conceptual Form
 
-- DXY momentum (3m + 12m)
-- Oil price transmission
-- Fed rate differential
-- BRICS average currency depreciation
-- Commodity-dollar correlation
+The DSI is a normalized composite of USD-linked macro-financial stress factors.
 
-No prior ML research has formalized this as a unified BRICS stress predictor. DSI backtests show elevated readings 2–3 months before all major EM crises since 1997.
+**DSI(t) = Σ (w_i × z_i(t)), for i = 1 to n**
 
----
+Where:
+- `z_i(t)` = standardized value of factor `i` at time `t`
+- `w_i` = weight of factor `i` (fixed or calibrated)
+- DSI is scaled into regime bands (low / moderate / high stress)
 
-## Project Structure
-
-```
-dollar-hegemony/
-├── src/
-│   ├── data_collector.py       # FRED + World Bank + Yahoo Finance pipeline
-│   ├── feature_engineer.py     # DSI construction + 60+ engineered features
-│   ├── model_xgboost.py        # XGBoost + SHAP analysis (all 5 BRICS)
-│   ├── model_lstm.py           # PyTorch LSTM forecaster
-│   ├── model_transformer.py    # Multi-country attention Transformer
-│   ├── meta_ensemble.py        # Ridge meta-learner + uncertainty bands
-│   └── dashboard.py            # Dash interactive dashboard (6 tabs)
-├── api/
-│   └── main.py                 # FastAPI REST backend
-├── data/
-│   ├── raw/                    # Downloaded API data
-│   └── processed/              # Feature-engineered datasets
-├── models/                     # Trained model artifacts (.pkl, .keras, .pt)
-├── outputs/
-│   ├── charts/                 # 20+ analysis charts
-│   └── results/                # Model performance CSVs
-├── Dockerfile.api
-├── Dockerfile.dashboard
-├── docker-compose.yml
-└── requirements-api.txt
-```
+### Typical Factor Families
+- USD broad strength proxies (e.g., DXY-linked signals)
+- Global rates/liquidity environment
+- Inflation and commodity stress proxies
+- Risk-off behavior and FX volatility clusters
+- Country-specific depreciation response terms
 
 ---
 
-## Quickstart
+## Modeling Framework
 
-### 1. Clone & Install
+### XGBoost
+- Handles nonlinear interactions in macro + market tabular signals
+- Strong baseline for country-level depreciation estimation
 
-```bash
-git clone https://github.com/ayushcmd/dollar-hegemony.git
-cd dollar-hegemony
-pip install -r requirements-api.txt
-```
-
-### 2. Run Full Pipeline
-
-```bash
-# Step 1 — Collect data
-python src/data_collector.py
-
-# Step 2 — Engineer features + build DSI
-python src/feature_engineer.py
-
-# Step 3 — Train models
-python src/model_xgboost.py
-python src/model_lstm.py
-python src/model_transformer.py
-python src/meta_ensemble.py
-
-# Step 4 — Launch dashboard
-python src/dashboard.py
-# Open: http://localhost:8050
-
-# Step 5 — Launch API
-uvicorn api.main:app --reload --port 8000
-# Docs: http://localhost:8000/docs
-```
-
-### 3. Or Run with Docker
-
-```bash
-docker-compose up --build
-# Dashboard → http://localhost:8050
-# API       → http://localhost:8000/docs
-```
-
----
-
-## API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/dsi` | Dollar Stress Index time series |
-| GET | `/api/predict/{country}` | Latest XGBoost forecast for a BRICS country |
-| POST | `/api/predict/custom` | What-if scenario with custom macro inputs |
-| GET | `/api/performance` | XGBoost model accuracy metrics |
-| GET | `/api/lstm-predictions` | LSTM predictions for all BRICS |
-| GET | `/api/ensemble-performance` | Meta-ensemble performance |
-| GET | `/api/countries` | Available countries + model status |
-
-**Example:**
-```bash
-curl http://localhost:8000/api/predict/India
-```
-```json
-{
-  "country": "India",
-  "date": "2024-11-30",
-  "predicted_depreciation_3m": -3.42,
-  "unit": "% change (12-month depreciation, 3-month ahead forecast)"
-}
-```
-
----
-
-## Dashboard — 6 Tabs
-
-1. **Overview** — DXY history, BRICS vs G7 depreciation comparison
-2. **Dollar Stress Index** — DSI timeline with crisis event markers
-3. **ML Predictions** — Actual vs predicted per country, model comparison
-4. **BRICS vs G7** — Correlation heatmaps, transmission coefficient analysis
-5. **SHAP Analysis** — Feature importance breakdown per BRICS country
-6. **Fundamentals** — GDP, Debt-to-GDP, CPI, Trade Balance, Stock Indices
-
-All charts have date range sliders and CSV/PNG download buttons.
+### LSTM
+- Learns temporal dependencies in FX stress transmission
+- Used for short-horizon directional and level prediction workflows
 
 ---
 
 ## Data Sources
 
-| Source | Data | Method |
-|--------|------|--------|
-| FRED (St. Louis Fed) | DXY, Fed Rate, US CPI, M2 | `fredapi` |
-| World Bank | GDP, Debt, Trade Balance (9 countries) | `wbgapi` |
-| Yahoo Finance | Currency pairs, commodities, stock indices | `yfinance` |
-
-**Coverage:** 2000–2024 (monthly frequency)  
-**Countries:** Brazil, Russia, India, China, South Africa + Germany, Japan, UK, Canada
-
----
-
-## Key Research Findings
-
-- BRICS currencies depreciate **2.5–3x more** per 10-point DXY rise vs G7
-- DSI spikes precede EM currency crises by **2–3 months** on average
-- India shows highest oil-DXY dual shock sensitivity (85% oil import dependency)
-- Brazil's commodity currency paradox is quantified — dollar strength depresses BRL despite export revenues
-- Cross-country Transformer attention weights reveal India–South Africa contagion channel
+As shown in the app and footer:
+- Yahoo Finance
+- FRED
+- World Bank
+- Live financial news feeds (News tab)
 
 ---
 
 ## Tech Stack
 
-`Python 3.11` · `PyTorch 2.2` · `XGBoost 2.0` · `scikit-learn` · `SHAP` · `Pandas` · `Plotly Dash` · `FastAPI` · `Docker` · `fredapi` · `wbgapi` · `yfinance`
+- **Language:** Python
+- **Dashboard/UI:** Plotly Dash
+- **Backend/API:** FastAPI
+- **ML:** XGBoost, LSTM
+- **Containerization:** Dockerfile
+
+---
+
+## High-Level Architecture
+
+```text
+Data Sources (Yahoo/FRED/World Bank/News)
+            │
+            ▼
+   Data Processing + Feature Engineering
+            │
+            ├── DSI Computation
+            ├── XGBoost Pipeline
+            └── LSTM Pipeline
+            │
+            ▼
+     Inference + Metrics + Alerts
+            │
+            ▼
+ Plotly Dash Interface + FastAPI Endpoints
+```
+
+---
+
+## Local Setup
+
+### 1) Clone
+```bash
+git clone https://github.com/ayushcmd/dollar-hegemony.git
+cd dollar-hegemony
+```
+
+### 2) Install dependencies
+```bash
+pip install -r requirements.txt --break-system-packages
+```
+
+### 3) Run (based on your repo entrypoint)
+```bash
+python app.py
+```
+
+or
+
+```bash
+uvicorn app.main:app --reload
+```
+
+---
+
+## Reproducibility Notes
+
+- Use fixed time-split train/validation/test windows
+- Version processed datasets and model artifacts
+- Track metrics per country and horizon
+- Record scenario assumptions when reporting outputs
+
+---
+
+## Limitations
+
+- Regime shifts can reduce historical model reliability
+- Output quality depends on data freshness and retraining
+- Research/analytics tool only — **not financial advice**
+
+---
+
+## Roadmap
+
+- [ ] Add uncertainty bands (quantile/interval forecasts)
+- [ ] Add explainability layer (feature attribution diagnostics)
+- [ ] Extend benchmark suite and ablation reporting
+- [ ] Automate retraining + monitoring workflows
 
 ---
 
 ## Author
 
-## Author
+**Ayush Raj**  
+BSc CSDA, IIT Patna (Grad: Aug 2027)
 
-Ayush Raj  
-BSc Computer Science & Data Analytics, IIT Patna
+- GitHub: https://github.com/ayushcmd  
+- LinkedIn: https://www.linkedin.com/in/ayush08iitp  
+- Portfolio: https://ayushcmd.me
 
-This project is part of my AI/ML portfolio focusing on global economic data analysis and interactive visualization.
+---
 
-Skills demonstrated:
-- Data Collection (APIs: FRED, World Bank, IMF)
-- Data Processing (Python, Pandas)
-- Machine Learning & Forecasting
-- Interactive Dashboard Development (Streamlit)
-- Data Visualization
+## Citation
 
-GitHub: https://github.com/ayushcmd
+If you use this project in research/content, cite:
+
+**Ayush Raj — Dollar Hegemony (GitHub + Hugging Face Space)**  
+- Repo: https://github.com/ayushcmd/dollar-hegemony  
+- Demo: https://huggingface.co/spaces/Ayush0826/dollar-hegemony
+
+---
+
+## License
+
+MIT (or as specified in `LICENSE`)
