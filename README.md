@@ -222,7 +222,7 @@ uvicorn app.main:app --reload
 ## Author
 
 **Ayush Raj**  
-BSc CSDA, IIT Patna (Grad: Aug 2027)
+BSc CSDA, IIT Patna (Grad: Aug 2028)
 
 - GitHub: https://github.com/ayushcmd  
 - LinkedIn: https://www.linkedin.com/in/ayush08iitp  
