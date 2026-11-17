@@ -1,3 +1,7 @@
+<!-- open-workers:top:start -->
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
+<!-- open-workers:top:end -->
+
 # Dollar Hegemony  
 ## Quantifying USD Dominance Across BRICS vs G7 with DSI, XGBoost, and LSTM
 
@@ -243,3 +247,9 @@ If you use this project in research/content, cite:
 ## License
 
 MIT (or as specified in `LICENSE`)
+
+<!-- open-workers:bottom:start -->
+## License
+
+Licensed under [Apache License 2.0](LICENSE).
+<!-- open-workers:bottom:end -->
